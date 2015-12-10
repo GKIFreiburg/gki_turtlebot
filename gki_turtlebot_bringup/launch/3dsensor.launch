@@ -1,7 +1,7 @@
 <!-- 
   Turtlebot is a bit low on horsepower...
 
-  We use openni_camera here, turn everything on by default
+  We use freenect_camera here, turn everything on by default
   (allows the user to conveniently see everything when
   launching this on its own - use with 
   turtebot_rviz_launchers/view_robot.launch to visualise)
@@ -32,7 +32,7 @@
 
   <group ns="$(arg camera)">
     <node pkg="nodelet" type="nodelet" name="$(arg manager)" respawn="true" args="manager"/>
-    <node pkg="nodelet" type="nodelet" name="openni_camera_loader" args="load openni_camera/driver $(arg manager)" respawn="true">
+    <node pkg="nodelet" type="nodelet" name="freenect_camera_loader" args="load freenect_camera/driver $(arg manager)" respawn="true">
         <rosparam file="$(find turtlebot_bringup)/param/3dsensor.yaml" command="load"/>
         <param name="depth_registration" value="$(arg depth_registration)"/>
     </node>
@@ -45,7 +45,7 @@
     </group>
 
     <!--                  Depth image processing 
-      Look in $(find openni_launch)/launch/includes/depth.launch for hints
+      Look in $(find freenect_launch)/launch/includes/depth.launch for hints
       Here we set things up for point cloud processing (follower mainly).
       At some point we may want the xyzrgb point cloud processing nodelet. 
     -->
