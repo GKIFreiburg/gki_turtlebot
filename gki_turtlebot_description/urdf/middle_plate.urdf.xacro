@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+<!--  <xacro:include filename="$(find turtlebot_description)/urdf/common_properties.urdf.xacro"/>
+  <xacro:include filename="$(find gki_turtlebot_description)/urdf/turtlebot_materials.urdf.xacro" />
+    -->
+  
+  <xacro:macro name="hokuyo_mount" params="parent robot_name xyz">
+    <joint name="hokuyo_mount_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="hokuyo_mount_link"/>
+    </joint>  
+    <link name="hokuyo_mount_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://gki_hardware_description/meshes/hokuyo_mount_small.stl"/>
+        </geometry>
+        <material name="${robot_name}_color"/>
+      </visual>  
+    </link>
+  </xacro:macro>
+  
+  <xacro:macro name="wing" params="parent robot_name xyz rpy side">
+      <joint name="${side}_wing_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <parent link="${parent}"/>
+      <child link="${side}_wing_link"/>
+    </joint>  
+    <link name="${side}_wing_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://gki_hardware_description/meshes/${side}_wing.stl"/>
+        </geometry>
+        <material name="${robot_name}_color"/>
+      </visual>  
+    </link>
+  </xacro:macro>
+  
+  <xacro:macro name="middle_plate" params="parent robot_name">
+    
+    <stack_middle_pole parent="${parent}" number="0" x_loc= "0.0381" y_loc= "0.1505" z_loc="0.1640"/>
+    <stack_middle_pole parent="${parent}" number="1" x_loc= "0.0381" y_loc="-0.1505" z_loc="0.1640"/>
+    <stack_middle_pole parent="${parent}" number="2" x_loc="-0.0381" y_loc= "0.1505" z_loc="0.1640"/>
+    <stack_middle_pole parent="${parent}" number="3" x_loc="-0.0381" y_loc="-0.1505" z_loc="0.1640"/>
+    
+    <joint name="plate_middle_joint" type="fixed">
+      <origin xyz="-0.01364 0.0 0.1874" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="plate_middle_link"/>
+    </joint>  
+    <link name="plate_middle_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://turtlebot_description/meshes/stacks/hexagons/plate_top.dae"/>
+        </geometry>
+      </visual>  
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.28727 0.340 0.006"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0"
+                 iyy="0.01" iyz="0.0"
+                 izz="0.01" />
+      </inertial>  
+    </link>
+
+    <stack_3d_sensor_pole parent="${parent}" number="0" x_loc="-0.1024" y_loc= "0.098" z_loc="0.2372"/>
+    <stack_3d_sensor_pole parent="${parent}" number="1" x_loc="-0.1024" y_loc="-0.098" z_loc="0.2372"/>
+
+    <hokuyo_mount parent="plate_middle_link" robot_name="${robot_name}" xyz="-0.04 0 0.003"/>
+    <wing parent="plate_middle_link" robot_name="${robot_name}" xyz="0.06 -0.15 0.0" rpy="0 0 2.0944" side="right"/>
+    <wing parent="plate_middle_link" robot_name="${robot_name}" xyz="0.06 0.15 0.0" rpy="0 0 -2.0944" side="left"/>
+
+    <joint name="nameplate_joint" type="fixed">
+      <origin xyz="0.0625 0 0.003" rpy="0 0 0"/>
+      <parent link="plate_middle_link"/>
+      <child link="nameplate_link"/>
+    </joint>  
+    <link name="nameplate_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://gki_hardware_description/meshes/nameplate_${robot_name}.dae"/>
+        </geometry>
+      </visual>  
+    </link>
+
+  </xacro:macro>
+</robot>

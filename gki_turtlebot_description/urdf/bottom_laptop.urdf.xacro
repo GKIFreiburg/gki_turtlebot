@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<robot name="stack_bottom_laptop" xmlns:xacro="http://ros.org/wiki/xacro">
+<!--
+  <xacro:include filename="$(find gki_turtlebot_description)/urdf/turtlebot_materials.urdf.xacro" />
+-->
+  <xacro:macro name="laptop_mount" params="parent robot_name direction xyz">
+    <joint name="laptop_mount_${direction}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="laptop_mount_${direction}_link"/>
+    </joint>  
+    <link name="laptop_mount_${direction}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://gki_hardware_description/meshes/laptop_mount_${direction}.stl"/>
+        </geometry>
+        <material name="${robot_name}_color"/>
+      </visual>  
+    </link>
+  </xacro:macro>
+  
+  <xacro:macro name="bottom_laptop_plate" params="parent robot_name">
+    <stack_bottom_pole parent="${parent}" number="0" x_loc= "0.120" y_loc= "0.082" z_loc="0.1028"/>
+    <stack_bottom_pole parent="${parent}" number="1" x_loc= "0.055" y_loc= "0.120" z_loc="0.1028"/>
+    <stack_bottom_pole parent="${parent}" number="2" x_loc="-0.055" y_loc= "0.120" z_loc="0.1028"/>
+    <stack_bottom_pole parent="${parent}" number="3" x_loc= "0.120" y_loc="-0.082" z_loc="0.1028"/>
+    <stack_bottom_pole parent="${parent}" number="4" x_loc= "0.055" y_loc="-0.120" z_loc="0.1028"/>
+    <stack_bottom_pole parent="${parent}" number="5" x_loc="-0.055" y_loc="-0.120" z_loc="0.1028"/>
+    
+    <joint name="plate_bottom_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.125" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="plate_bottom_link"/>
+    </joint>  
+    <link name="plate_bottom_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://gki_hardware_description/meshes/bottom_laptop_plate.stl"/>
+        </geometry>
+        <material name="brown_mdf_plate"/>
+      </visual>  
+      <collision>
+        <origin xyz="0 0 0.03" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.4 0.3 0.075"/>
+        </geometry>
+        <material name="collision_color"/>
+      </collision>
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.01" ixy="0.0" ixz="0.0"
+                 iyy="0.01" iyz="0.0"
+                 izz="0.01" />
+      </inertial>
+    </link>
+    
+    <laptop_mount parent="${parent}" robot_name="${robot_name}" direction="front" xyz="0.20 0.04 0.133"/>
+    <laptop_mount parent="${parent}" robot_name="${robot_name}" direction="back" xyz="-0.20 0.0 0.133"/>
+    <laptop_mount parent="${parent}" robot_name="${robot_name}" direction="right" xyz="0.02 -0.083 0.133"/>
+    <laptop_mount parent="${parent}" robot_name="${robot_name}" direction="left" xyz="0.02 0.083 0.133"/>
+        
+    <joint name="laptop_mount_estop_joint" type="fixed">
+      <origin xyz="-0.16 -0.11 0.125" rpy="0 3.1415 0.785398"/>
+      <parent link="${parent}"/>
+      <child link="laptop_mount_estop_link"/>
+    </joint>  
+    <link name="laptop_mount_estop_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://gki_hardware_description/meshes/estop_mount.stl"/>
+        </geometry>
+        <material name="${robot_name}_color"/>
+      </visual>  
+    </link>
+  </xacro:macro>
+</robot>

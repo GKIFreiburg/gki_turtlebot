@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+  The complete turtlebot library of xacros for easy reference
+ -->
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_library.urdf.xacro" />
+  <xacro:include filename="$(find gki_turtlebot_description)/urdf/turtlebot_materials.urdf.xacro" />
+  <xacro:include filename="$(find gki_turtlebot_description)/urdf/bottom_laptop.urdf.xacro" />
+  <xacro:include filename="$(find gki_turtlebot_description)/urdf/middle_plate.urdf.xacro" />
+  <xacro:include filename="$(find gki_turtlebot_description)/urdf/top_laptop.urdf.xacro" />
+  <xacro:include filename="$(find gki_turtlebot_description)/urdf/front_sensor_mount.urdf.xacro" />
+</robot>

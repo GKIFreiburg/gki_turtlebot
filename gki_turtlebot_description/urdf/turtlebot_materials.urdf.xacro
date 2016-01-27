@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot>
+
+	<material name="caeruleus_color">
+		<color rgba="0.0 0.0 0.6 1.0"/>
+	</material>
+
+	<material name="rubeus_color">
+		<color rgba="0.6 0.0 0.0 1.0"/>
+	</material>
+
+	<material name="argentea_color">
+		<color rgba="0.5 0.5 0.5 1.0"/>
+	</material>
+
+	<material name="alba_color">
+		<color rgba="0.8 0.8 0.8 1.0"/>
+	</material>
+
+	<material name="murphy_color">
+		<color rgba="0.15 0.15 0.15 1.0"/>
+	</material>
+
+	<material name="brown_mdf_plate">
+		<color rgba="0.06 0.03 0.01 1.0"/>
+	</material>
+
+	<material name="light_gray_color">
+		<color rgba="0.5 0.5 0.5 1.0"/>
+	</material>
+
+	<material name="collision_color">
+		<color rgba="1.0 0.5 0.0 1.0"/>
+	</material>
+<!--
+	<material name="Caster">
+		<texture filename="package://pr2_ogre/Media/materials/textures/pr2_caster_texture.png" />
+	</material>
+-->
+</robot>

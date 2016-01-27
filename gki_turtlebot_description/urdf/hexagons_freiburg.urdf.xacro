@@ -208,7 +208,7 @@
     
     <joint name="plate_top_joint" type="fixed">
         <!-- <origin xyz="-0.01364 0.0  0.3966" rpy="0 0 0"/> -->
-      <origin xyz="0.0 0.0 0.3966" rpy="0 0 0"/>
+      <origin xyz="0 0.0 0.3966" rpy="0 0 3.1415"/>
       <parent link="${parent}"/>
       <child link="plate_top_link"/>
     </joint>  
@@ -216,7 +216,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://gki_turtlebot_description/meshes/stacks/hexagons_freiburg/plate_top.dae"/>
+          <mesh filename="package://gki_turtlebot_description/meshes/stacks/hexagons_freiburg/plate_top_test.dae"/>
         </geometry>
         <material name="Grey">
           <color rgba="0 0 0 1.0"/>
