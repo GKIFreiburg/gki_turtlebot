@@ -12,12 +12,13 @@
 
   <xacro:include filename="$(find gki_turtlebot_description)/robots/gki_turtlebot.urdf.xacro" />
   <xacro:property name="robot_name" value="murphy"/>
-	<kobuki/>
-	<stack_hexagons_freiburg parent="base_link"/>
-	<hokuyo_mount parent="plate_middle_link" robot_name="${robot_name}" xyz="-0.04 0 0.003"/>
-	<sensor_kinect  parent="base_link"/>
-	<xacro:hokuyo_urg name="base_laser" parent="base_link" ros_topic="base_scan" update_rate="10" ray_count="667" min_angle="120" max_angle="-120">
-		<origin xyz="-0.055 0.0 0.195" rpy="0 0 0"/>
-	</xacro:hokuyo_urg>
+		<kobuki/>
+		<bottom_plate parent="base_link"/>
+		<middle_plate parent="base_link" robot_name="${robot_name}"/>
+		<top_laptop_plate parent="base_link"/>
+		<sensor_kinect  parent="base_link"/>
+		<xacro:hokuyo_urg name="base_laser" parent="base_link" ros_topic="base_scan" update_rate="10" ray_count="667" min_angle="120" max_angle="-120">
+			<origin xyz="-0.055 0.0 0.195" rpy="0 0 0"/>
+		</xacro:hokuyo_urg>
 
 </robot>
