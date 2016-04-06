@@ -13,13 +13,20 @@
     <include file="$(find gki_turtlebot_bringup)/launch/ps3_teleop.launch" />
 
     <include file="$(find gki_turtlebot_bringup)/launch/laser.launch" />
-    <include file="$(find gki_turtlebot_bringup)/launch/scan_filter.launch" />
+    <group unless="$(arg turtlebot_has_buttons)">
+    	<include file="$(find gki_turtlebot_bringup)/launch/scan_filter.launch" />
+    </group>
     <include file="$(find gki_turtlebot_bringup)/launch/3dsensor.launch">
         <arg name="scan_processing" value="false" />
         <arg name="depth_registration" value="false" />
     </include>
     <group if="$(arg turtlebot_has_buttons)">
+		    <include file="$(find gki_turtlebot_bringup)/launch/scan_filter.launch">
+		    	<arg name="config_file" value="scan_filter_top_plate.yaml"/>
+		    </include>
         <include file="$(find gki_turtlebot_bringup)/launch/arduino_buttons.launch" />
     </group>
+
+    <include file="$(find master_discovery_fkie)/launch/master_discovery.launch" />
 </launch>
 
