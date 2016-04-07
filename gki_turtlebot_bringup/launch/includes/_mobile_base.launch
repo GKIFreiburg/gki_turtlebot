@@ -29,12 +29,11 @@
   <node pkg="nodelet" type="nodelet" name="cmd_vel_mux_manager" args="manager"/>
   <node pkg="nodelet" type="nodelet" name="cmd_vel_mux" args="load cmd_vel_mux/CmdVelMuxNodelet cmd_vel_mux_manager">
   -->
-	<!--  smooths inputs from cmd_vel_mux/input/teleop_raw to cmd_vel_mux/input/teleop -->
-	<include file="$(find turtlebot_navigation)/launch/includes/_velocity_smoother.launch"/>
-      
+  <!--  smooths inputs from cmd_vel_mux/input/navi_raw to cmd_vel_mux/input/navi -->
+  <include file="$(find gki_turtlebot_bringup)/launch/includes/_velocity_smoother.launch"/>
+  
   <node pkg="nodelet" type="nodelet" name="cmd_vel_mux" args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">
     <param name="yaml_cfg_file" value="$(find gki_turtlebot_bringup)/config/mux.yaml" />
-    <!-- <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/> -->
   </node>
   
   <!-- bumper/cliff to pointcloud -->
