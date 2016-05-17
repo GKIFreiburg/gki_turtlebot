@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
 <robot name="stack_bottom_laptop" xmlns:xacro="http://ros.org/wiki/xacro">
-<!--
-  <xacro:include filename="$(find gki_turtlebot_description)/urdf/turtlebot_materials.urdf.xacro" />
--->
   <xacro:macro name="laptop_mount" params="parent robot_name direction xyz">
     <joint name="laptop_mount_${direction}_joint" type="fixed">
       <origin xyz="${xyz}" rpy="0 0 0"/>

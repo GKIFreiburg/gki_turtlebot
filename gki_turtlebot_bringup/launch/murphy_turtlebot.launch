@@ -1,5 +1,5 @@
 <launch>
-  <arg name="robot_name" value="argentea"/>
+  <arg name="robot_name" value="murphy"/>
   <include file="$(find gki_turtlebot_bringup)/launch/turtlebot.launch">
     <arg name="robot_name" value="$(arg robot_name)" />
   </include>
