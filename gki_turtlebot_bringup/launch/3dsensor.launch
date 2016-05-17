@@ -33,7 +33,7 @@
   <group ns="$(arg camera)">
     <node pkg="nodelet" type="nodelet" name="$(arg manager)" respawn="true" args="manager"/>
     <node pkg="nodelet" type="nodelet" name="freenect_camera_loader" args="load freenect_camera/driver $(arg manager)" respawn="true">
-        <rosparam file="$(find turtlebot_bringup)/param/3dsensor.yaml" command="load"/>
+        <rosparam file="$(find gki_turtlebot_bringup)/param/3dsensor.yaml" command="load"/>
         <param name="depth_registration" value="$(arg depth_registration)"/>
     </node>
 
@@ -56,7 +56,7 @@
             ns="$(arg depth)">
         <remap from="topic_in"  to="image_raw" />   <!-- Input -->
         <remap from="topic_out"  to="image_raw_throttle" />  <!-- Output -->
-        <param name="update_rate" value="13" />
+        <param name="update_rate" value="1" />
       </node>
 
       <node pkg="nodelet" type="nodelet" name="rectify_depth"
