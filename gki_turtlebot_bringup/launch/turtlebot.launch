@@ -26,7 +26,8 @@
 		    </include>
         <include file="$(find gki_turtlebot_bringup)/launch/arduino_buttons.launch" />
     </group>
-
+<!--
     <include file="$(find gki_turtlebot_bringup)/launch/master_discovery.launch" />
+-->
 </launch>
 
