@@ -2,32 +2,33 @@
     <arg name="robot_name" default="murphy"/>
     <arg name="turtlebot_has_buttons" value="$(optenv TURTLEBOT_HAS_BUTTONS false)"/>
 
-    <include file="$(find gki_turtlebot_bringup)/launch/minimal.launch">
-      <arg name="robot_name" value="$(arg robot_name)" />
-    </include>
+    <group ns="$(arg robot_name)">
+		  <include file="$(find gki_turtlebot_bringup)/launch/minimal.launch">
+		    <arg name="robot_name" value="$(arg robot_name)" />
+		  </include>
 
-    <include file="$(find gki_turtlebot_bringup)/launch/includes/_safety_controller.launch">
-        <arg name="turtlebot_has_buttons" value="$(arg turtlebot_has_buttons)"/>
-    </include>
+		  <include file="$(find gki_turtlebot_bringup)/launch/includes/_safety_controller.launch">
+		      <arg name="turtlebot_has_buttons" value="$(arg turtlebot_has_buttons)"/>
+		  </include>
 
-    <include file="$(find gki_turtlebot_bringup)/launch/ps3_teleop.launch" />
+		  <include file="$(find gki_turtlebot_bringup)/launch/ps3_teleop.launch" />
 
-    <include file="$(find gki_turtlebot_bringup)/launch/laser.launch" />
-    <group unless="$(arg turtlebot_has_buttons)">
-    	<include file="$(find gki_turtlebot_bringup)/launch/scan_filter.launch" />
+		  <include file="$(find gki_turtlebot_bringup)/launch/laser.launch" />
+		  <group unless="$(arg turtlebot_has_buttons)">
+		  	<include file="$(find gki_turtlebot_bringup)/launch/scan_filter.launch" />
+		  </group>
+		  <include file="$(find gki_turtlebot_bringup)/launch/3dsensor.launch">
+		      <arg name="scan_processing" value="false" />
+		      <arg name="depth_registration" value="false" />
+		  </include>
+		  <group if="$(arg turtlebot_has_buttons)">
+				  <include file="$(find gki_turtlebot_bringup)/launch/scan_filter.launch">
+				  	<arg name="config_file" value="scan_filter_top_plate.yaml"/>
+				  </include>
+		      <include file="$(find gki_turtlebot_bringup)/launch/arduino_buttons.launch" />
+		  </group>
+
+		  <include file="$(find gki_turtlebot_bringup)/launch/master_discovery.launch" />
     </group>
-    <include file="$(find gki_turtlebot_bringup)/launch/3dsensor.launch">
-        <arg name="scan_processing" value="false" />
-        <arg name="depth_registration" value="false" />
-    </include>
-    <group if="$(arg turtlebot_has_buttons)">
-		    <include file="$(find gki_turtlebot_bringup)/launch/scan_filter.launch">
-		    	<arg name="config_file" value="scan_filter_top_plate.yaml"/>
-		    </include>
-        <include file="$(find gki_turtlebot_bringup)/launch/arduino_buttons.launch" />
-    </group>
-<!--
-    <include file="$(find gki_turtlebot_bringup)/launch/master_discovery.launch" />
--->
 </launch>
 
