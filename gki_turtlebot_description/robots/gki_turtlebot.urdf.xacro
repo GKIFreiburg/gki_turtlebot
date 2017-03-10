@@ -7,6 +7,7 @@
 
 	<xacro:include filename="$(find gki_turtlebot_description)/urdf/turtlebot_library.urdf.xacro" />
 	<xacro:include filename="$(find gki_sensors_description)/urdf/hokuyo_urg.urdf.xacro" />
+	<xacro:include filename="$(find turtlebot_description)/urdf/sensors/kinect.urdf.xacro"/>
 
 	<xacro:macro name="gki_turtlebot" params="robot_name">
 		<kobuki/>

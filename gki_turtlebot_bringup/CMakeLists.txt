@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   robot_pose_ekf
   rosserial_python
   turtlebot_bringup
+  urg_node
 #  turtlebot_button
 )
 

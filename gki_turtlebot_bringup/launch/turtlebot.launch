@@ -16,10 +16,21 @@
     <group unless="$(arg turtlebot_has_buttons)">
     	<include file="$(find gki_turtlebot_bringup)/launch/scan_filter.launch" />
     </group>
-    <include file="$(find gki_turtlebot_bringup)/launch/3dsensor.launch">
-        <arg name="scan_processing" value="false" />
+    <!--  
+    <include file="$(find turtlebot_bringup)/launch/3dsensor.launch">
+		<arg name="publish_tf"  value="true"/>
+		<arg name="3d_sensor"   value="kinect"/>
         <arg name="depth_registration" value="false" />
+        <arg name="scan_processing" value="false" />
     </include>
+     -->
+    <include file="$(find freenect_launch)/launch/freenect.launch">
+		<arg name="publish_tf"  value="false"/>
+		<arg name="3d_sensor"   value="kinect"/>  <!-- kinect, asus_xtion_pro -->
+        <arg name="depth_registration" value="false" />
+        <arg name="scan_processing" value="false" />
+    </include>    
+    
     <group if="$(arg turtlebot_has_buttons)">
 		    <include file="$(find gki_turtlebot_bringup)/launch/scan_filter.launch">
 		    	<arg name="config_file" value="scan_filter_top_plate.yaml"/>

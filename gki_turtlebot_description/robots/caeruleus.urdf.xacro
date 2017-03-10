@@ -10,8 +10,10 @@
 
 	<xacro:property name="robot_name" value="caeruleus" />
 	<gki_turtlebot robot_name="caeruleus"/>
+	<!-- 
 	<front_sensor_mount parent="plate_bottom_link"/>
 	<xacro:sick_rfu620 name="rfid_sensor" parent="base_link" ros_topic="rfid_tag">
 		<origin xyz="0.225 0.0 0.075" rpy="1.5708 0 1.5708"/>
 	</xacro:sick_rfu620>
+	 -->
 </robot>
